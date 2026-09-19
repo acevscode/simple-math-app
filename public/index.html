@@ -85,23 +85,18 @@
 </div>
 
 <script>
-    async function calculate() {
-        const n1 = document.getElementById('num1').value;
-        const n2 = document.getElementById('num2').value;
+    function calculate() {
+        const n1 = Number(document.getElementById('num1').value);
+        const n2 = Number(document.getElementById('num2').value);
 
-        const response = await fetch('/api/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ num1: Number(n1), num2: Number(n2) })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            document.getElementById('result').innerText = `תוצאה: ${data.sum}`;
-        } else {
-            document.getElementById('result').innerText = `שגיאה: ${data.error}`;
+        // ולידציה מקומית בדפדפן
+        if (n1 < 1 || n1 > 10 || n2 < 1 || n2 > 10) {
+            document.getElementById('result').innerText = 'שגיאה: המספרים חייבים להיות בין 1 ל-10';
+            return;
         }
+
+        const sum = n1 + n2;
+        document.getElementById('result').innerText = `תוצאה: ${sum}`;
     }
 </script>
 
